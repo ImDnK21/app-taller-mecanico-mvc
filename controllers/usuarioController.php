@@ -4,7 +4,8 @@ require_once '../models/usuario.php';
 class usuarioController {
     
         public function index() {
-            require_once 'views/usuario/index.php';
+            // require_once 'views/usuario/index.php';
+            echo "Controlador Usuarios, Acción index";
         }
     
         public function registro() {
@@ -14,8 +15,8 @@ class usuarioController {
         public function save() {
             if (isset($_POST)) {
                 $idUsername = isset($_POST['idUsername']) ? $_POST['idUsername'] : false;
-                $nombreusuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : false;
-                $apellidosUsuario = isset($_POST['apellidoUsuario']) ? $_POST['apellidoUsuario'] : false;
+                $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : false;
+                $apellidoUsuario = isset($_POST['apellidoUsuario']) ? $_POST['apellidoUsuario'] : false;
                 $password = isset($_POST['password']) ? $_POST['password'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
                 $rol = isset($_POST['rol']) ? $_POST['rol'] : false;
@@ -23,14 +24,14 @@ class usuarioController {
                 $idOT = isset($_POST['idOT']) ? $_POST['idOT'] : false;
 
     
-                if ($nombreusuario && $apellidoUsuario && $password && $email  ) {
-                    $usuario = new Usuario();
-                    $usuario->setNombre($nombre);
-                    $usuario->setApellidoUsuario($apellidoUsuario);
-                    $usuario->setEmail($email);
-                    $usuario->setPassword($password);
+                if ($nombreUsuario && $apellidoUsuario && $password && $email  ) {
+                    $nombreUsuario = new Usuario();
+                    $nombreUsuario->setNombreUsuario($nombreUsuario);
+                    $nombreUsuario->setApellidoUsuario($apellidoUsuario);
+                    $nombreUsuario->setEmail($email);
+                    $nombreUsuario->setPassword($password);
     
-                    $save = $usuario->save();
+                    $save = $nombreUsuario->save();
     
                     if ($save) {
                         $_SESSION['register'] = "complete";
@@ -46,17 +47,18 @@ class usuarioController {
             header("Location:" . base_url . 'usuario/registro');
         }
     
-        public function login() {
-            if (isset($_POST)) {
-                // Identificar al usuario
-                // Consulta a la base de datos
-                $usuario = new Usuario();
-                $usuario->setEmail($_POST['email']);
-                $usuario->setPassword($_POST['password']);    
-                $identity = $nombreUsuario->login();
-    
-                if ($identity && is_object($identity)) {
-                    $_SESSION['identity'] = $identity;
+        public function login(){
+		if(isset($_POST)){
+			// Identificar al usuario
+			// Consulta a la base de datos
+			$usuario = new Usuario();
+			$usuario->setEmail($_POST['email']);
+			$usuario->setPassword($_POST['password']);
+			
+			$identity = $usuario->login();
+			
+			if($identity && is_object($identity)){
+				$_SESSION['identity'] = $identity;
 				
 				if($identity->rol == 'admin'){
 					$_SESSION['admin'] = true;
@@ -83,4 +85,3 @@ class usuarioController {
 	}
 	
 } // fin clase
-?>

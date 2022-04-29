@@ -23,7 +23,7 @@ class Usuario {
 		return $this->nombreUsuario;
 	}
 
-    function geApellidoUsuario(){
+    function getApellidoUsuario(){
         return $this->apellidoUsuario;
     }
 
@@ -67,7 +67,6 @@ class Usuario {
 	}
 
 
-
 	function setRol($rol) {
 		$this->rol = $rol;
 	}
@@ -81,7 +80,7 @@ class Usuario {
     }
 
 	public function save(){
-		$sql = "INSERT INTO usuario VALUES(NULL, '{$this->getIdUsername()}','{$this->getNombreUsuario()}','{$this->getApellidoUsuario}' '{$this->getIdOT()}', '{$this->getEmail()}', '{$this->getPassword()}','{$this->getImagen()}','{$this->getRol()}', 'user', null);";
+		$sql = "INSERT INTO usuario VALUES(NULL, '{$this->getIdUsername()}', '{$this->getNombreUsuario()}', '{$this->getApellidoUsuario()}', '{$this->getPassword()}', '{$this->getEmail()}','{$this->getRol()}','{$this->getImagen()}','{$this->getIdOT()}''user', null);";
 		$save = $this->db->query($sql);
 		
 		$result = false;
