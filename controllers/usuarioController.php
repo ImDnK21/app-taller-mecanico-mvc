@@ -7,42 +7,43 @@ class usuarioController {
             // require_once 'views/usuario/index.php';
             echo "Controlador Usuarios, Acción index";
         }
+
+        public function inicio() {
+            require_once 'views/usuario/login.php';
+        }
     
         public function registro() {
-            require_once 'views/usuario/registro.php';
+            require_once 'views/usuario/register.php';
         }
     
         public function save() {
             if (isset($_POST)) {
-                $idUsername = isset($_POST['idUsername']) ? $_POST['idUsername'] : false;
-                $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : false;
-                $apellidoUsuario = isset($_POST['apellidoUsuario']) ? $_POST['apellidoUsuario'] : false;
-                $password = isset($_POST['password']) ? $_POST['password'] : false;
+                $id = isset($_POST['idOT']) ? $_POST['idOT'] : false;
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
-                $rol = isset($_POST['rol']) ? $_POST['rol'] : false;
-                $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : false;
-                $idOT = isset($_POST['idOT']) ? $_POST['idOT'] : false;
-
+                $password = isset($_POST['password']) ? $_POST['password'] : false;
     
-                if ($nombreUsuario && $apellidoUsuario && $password && $email  ) {
-                    $nombreUsuario = new Usuario();
-                    $nombreUsuario->setNombreUsuario($nombreUsuario);
-                    $nombreUsuario->setApellidoUsuario($apellidoUsuario);
-                    $nombreUsuario->setEmail($email);
-                    $nombreUsuario->setPassword($password);
+                if ($id && $nombre && $apellido && $email && $password) {
+                    $usuario = new Usuario();
+                    $usuario->setId($id);
+                    $usuario->setNombre($nombre);
+                    $usuario->setApellido($apellido);
+                    $usuario->setEmail($email);
+                    $usuario->setPassword($password);
     
-                    $save = $nombreUsuario->save();
+                    $save = $usuario->save();
     
                     if ($save) {
-                        $_SESSION['register'] = "complete";
+                        die("Guardado");
                     } else {
-                        $_SESSION['register'] = "failed";
+                        die("Error al guardar");
                     }
                 } else {
-                    $_SESSION['register'] = "failed";
+                    die("Error al guardar");
                 }
             } else {
-                $_SESSION['register'] = "failed";
+                die("Error al guardar");
             }
             header("Location:" . APP_URL . 'usuario/registro');
         }
@@ -74,10 +75,10 @@ class usuarioController {
 
     public function login() {
         if (isset($_POST) && !empty($_POST)) {
-            $user = new Usuario();
-            $user->setEmail($_POST['email']);
-            $user->setPassword($_POST['password']);
-            $identity = $user->login();
+            $usuario = new Usuario();
+            $usuario->setEmail($_POST['email']);
+            $usuario->setPassword($_POST['password']);
+            $identity = $usuario->login();
 
             if ($identity && is_object($identity)) {
                 $_SESSION['identity'] = $identity;
@@ -86,13 +87,11 @@ class usuarioController {
                 }
                 header('Location:' . APP_URL);
             } else {
-                $_SESSION['login'] = 'failed.';
-                header('Location:' . APP_URL . 'user/signin');
+                die('Error');
+                header('Location:' . APP_URL . 'usuario/login');
             }
         }
     }
-
-
 	
 	public function logout(){
 		if(isset($_SESSION['identity'])){

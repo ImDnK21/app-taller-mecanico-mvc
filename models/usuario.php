@@ -1,134 +1,78 @@
 <?php
-
 class Usuario {
-    private $idUsername;
-    private $nombreUsuario;
-    private $apellidoUsuario;
-    private $password;
-    private $email;
-    private $rol;
-    private $imagen;
-    private $idOT;
     private $db;
+    private $id;
+    private $nombre;
+    private $apellido;
+    private $email;
+    private $password;
 
-    public function __contruct(){
-        $this->db = Database::connect();
-    }
-
-    public function getIdUsername() {
-        return $this->idUsername;
-    }
-
-	function getNombreUsuario() {
-		return $this->nombreUsuario;
+    public function __construct() {
+		$this->db = Database::connect();
 	}
 
-    function getApellidoUsuario(){
-        return $this->apellidoUsuario;
+    function getId(){
+        return $this->id;
     }
 
-	function getPassword() {
-		return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
-	}
+    function getNombre() {
+        return $this->nombre;
+    }
+
+    function getApellido() {
+        return $this->apellido;
+    }
 
     function getEmail() {
         return $this->email;
     }
 
-	function getRol() {
-		return $this->rol;
-	}
-
-	function getImagen() {
-		return $this->imagen;
-	}
-
-	function getIdOT() {
-        return $this->idOT;
+    function getPassword() {
+        return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
     }
 
-    function setIdUsername($idUsername) {
-        $this->idUsername = $idUsername;
+    function setId($id) {
+        $this->id = $id;
     }
 
-    function setNombreUsuario($nombreUsuario) {
-        $this->nombreUsuario = $nombreUsuario;
+    function setNombre($nombre) {
+        $this->nombre = $this->db->real_escape_string($nombre);
     }
 
-    function setApellidoUsuario($apellidoUsuario) {
-        $this->apellidoUsuario = $apellidoUsuario;
+    function setApellido($apellido) {
+        $this->apellido = $this->db->real_escape_string($apellido);
     }
-	function setPassword($password) {
-		$this->password = $password;
-	}
 
-	function setEmail($email) {
-		// $this->email = $this->db->real_escape_string($email);
-		 $this->email = $email;
-	}
+    function setEmail($email) {
+        $this->email = $this->db->real_escape_string($email);
+    }
 
-
-	function setRol($rol) {
-		$this->rol = $rol;
-	}
-
-	function setImagen($imagen) {
-		$this->imagen = $imagen;
-	}
-
-    function setIdOT($idOT) {
-        $this->idOT = $idOT;
+    function setPassword($password) {
+        $this->password = $password;
     }
 
 	public function save(){
-		$sql = "INSERT INTO usuario VALUES(NULL, '{$this->getIdUsername()}', '{$this->getNombreUsuario()}', '{$this->getApellidoUsuario()}', '{$this->getPassword()}', '{$this->getEmail()}','{$this->getRol()}','{$this->getImagen()}','{$this->getIdOT()}''user', null);";
+		$sql = "INSERT INTO usuario (ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO, CORREO_ELECTRONICO, PASSWORD) VALUES('{$this->getId()}', '{$this->getNombre()}', '{$this->getApellido()}', '{$this->getEmail()}', '{$this->getPassword()}');";
+
+        echo $sql;
+
 		$save = $this->db->query($sql);
-		
 		$result = false;
 		if($save){
 			$result = true;
 		}
 		return $result;
 	}
-	
-	// public function login(){
-	// 	$result = false;
-	// 	$email = $this->email;
-	// 	$password = $this->password;
-		
-	// 	// Comprobar si existe el usuario
-	// 	$sql = "SELECT * FROM usuario WHERE email = '$email'";
-	// 	$login = $this->db->query($sql);
-		
-		
-	// 	if($login && $login->num_rows == 1){
-	// 		$usuario = $login->fetch_object();
-			
-	// 		// Verificar la contraseña
-	// 		$verify = password_verify($password, $usuario->password);
-			
-	// 		if($verify){
-	// 			$result = $usuario;
-	// 		}
-	// 	}
-		
-	// 	return $result;
-	// }
 
 	public function login(){
 		$result = false;
 		$email = $this->email;
 		$password = $this->password;
-		
-		// Comprobar si existe el usuario
-		$sql = "SELECT * FROM usuario WHERE email = '$email'";
-		$login = $this->db->query($sql);
-		
+		$sql = "SELECT * FROM usuario WHERE correo_electronico = '$email'";
+		$login = $this->db->query($sql);	
 		
 		if($login && $login->num_rows == 1){
 			$usuario = $login->fetch_object();
-			
-			// Verificar la contraseña
 			$verify = password_verify($password, $usuario->password);
 			
 			if($verify){
@@ -138,10 +82,4 @@ class Usuario {
 		
 		return $result;
 	}
-
-
-
-
-
-
 }
