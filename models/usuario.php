@@ -63,7 +63,8 @@ class Usuario {
 	}
 
 	function setEmail($email) {
-		$this->email = $this->db->real_escape_string($email);
+		// $this->email = $this->db->real_escape_string($email);
+		 $this->email = $email;
 	}
 
 
@@ -90,6 +91,30 @@ class Usuario {
 		return $result;
 	}
 	
+	// public function login(){
+	// 	$result = false;
+	// 	$email = $this->email;
+	// 	$password = $this->password;
+		
+	// 	// Comprobar si existe el usuario
+	// 	$sql = "SELECT * FROM usuario WHERE email = '$email'";
+	// 	$login = $this->db->query($sql);
+		
+		
+	// 	if($login && $login->num_rows == 1){
+	// 		$usuario = $login->fetch_object();
+			
+	// 		// Verificar la contraseña
+	// 		$verify = password_verify($password, $usuario->password);
+			
+	// 		if($verify){
+	// 			$result = $usuario;
+	// 		}
+	// 	}
+		
+	// 	return $result;
+	// }
+
 	public function login(){
 		$result = false;
 		$email = $this->email;
@@ -113,6 +138,8 @@ class Usuario {
 		
 		return $result;
 	}
+
+
 
 
 

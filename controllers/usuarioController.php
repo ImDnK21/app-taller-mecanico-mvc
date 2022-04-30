@@ -1,5 +1,5 @@
 <?php 
-require_once '../models/usuario.php';
+require_once 'models/usuario.php';
 
 class usuarioController {
     
@@ -44,33 +44,55 @@ class usuarioController {
             } else {
                 $_SESSION['register'] = "failed";
             }
-            header("Location:" . base_url . 'usuario/registro');
+            header("Location:" . APP_URL . 'usuario/registro');
         }
     
-        public function login(){
-		if(isset($_POST)){
-			// Identificar al usuario
-			// Consulta a la base de datos
-			$usuario = new Usuario();
-			$usuario->setEmail($_POST['email']);
-			$usuario->setPassword($_POST['password']);
+    //     public function login(){
+	// 	if(isset($_POST)){
+	// 		// Identificar al usuario
+	// 		// Consulta a la base de datos
+	// 		$usuario = new Usuario();
+	// 		$usuario->setEmail($_POST['email']);
+	// 		$usuario->setPassword($_POST['password']);
 			
-			$identity = $usuario->login();
+	// 		$identity = $usuario->login();
 			
-			if($identity && is_object($identity)){
-				$_SESSION['identity'] = $identity;
+	// 		if($identity && is_object($identity)){
+	// 			$_SESSION['identity'] = $identity;
 				
-				if($identity->rol == 'admin'){
-					$_SESSION['admin'] = true;
-				}
+	// 			if($identity->rol == 'admin'){
+	// 				$_SESSION['admin'] = true;
+	// 			}
 				
-			}else{
-				$_SESSION['error_login'] = 'Identificación fallida !!';
-			}
+	// 		}else{
+	// 			$_SESSION['error_login'] = 'Identificación fallida !!';
+	// 		}
 		
-		}
-		header("Location:".base_url);
-	}
+	// 	}
+	// 	header("Location:".base_url);
+	// }
+
+    public function login() {
+        if (isset($_POST) && !empty($_POST)) {
+            $user = new Usuario();
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $identity = $user->login();
+
+            if ($identity && is_object($identity)) {
+                $_SESSION['identity'] = $identity;
+                if ($identity->role == 'admin') {
+                    $_SESSION['admin'] = true;
+                }
+                header('Location:' . APP_URL);
+            } else {
+                $_SESSION['login'] = 'failed.';
+                header('Location:' . APP_URL . 'user/signin');
+            }
+        }
+    }
+
+
 	
 	public function logout(){
 		if(isset($_SESSION['identity'])){
@@ -81,7 +103,7 @@ class usuarioController {
 			unset($_SESSION['admin']);
 		}
 		
-		header("Location:".base_url);
+		header("Location:".APP_URL);
 	}
 	
 } // fin clase
