@@ -1,10 +1,5 @@
-<!-- BARRA LATERAL -->
 <aside id="lateral">
-
-
-	
 	<div id="login" class="block_aside">
-		
 		<?php if(!isset($_SESSION['identity'])): ?>
 			<h3>Entrar a la web</h3>
 			<form action="<?=APP_URL?>usuario/login" method="post">
@@ -16,7 +11,7 @@
 			</form>
             
 		<?php else: ?>
-			<h3><?=$_SESSION['identity']->nombre?> <?=$_SESSION['identity']->apellidos?></h3>
+			<h3><?=$_SESSION['identity']->nombre_usuario ?> <?=$_SESSION['identity']->apellido_usuario ?></h3>
 		<?php endif; ?>
 
 		<ul>
@@ -34,8 +29,4 @@
 			<?php endif; ?> 
 		</ul>
 	</div>
-
 </aside>
-
-<!-- CONTENIDO CENTRAL -->
-<div id="central">

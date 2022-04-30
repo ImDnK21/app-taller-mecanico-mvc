@@ -8,7 +8,7 @@
                 </div>
             </article>
             <?php } unset($_SESSION['error_message']); unset($_SESSION['error_type']); ?>
-            <form method="POST" class="card" action="">
+            <form action="<?= APP_URL . 'usuario/login' ?>" method="POST" class="card">
                 <div class="card-header">
                     <p class="card-header-title">
                         Inicio de sesión

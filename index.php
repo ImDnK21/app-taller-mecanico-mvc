@@ -14,7 +14,6 @@ function show_error(){
 
 if(isset($_GET['controller'])){
 	$nombre_controlador = $_GET['controller'].'Controller';
-
 }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
 	$nombre_controlador = controller_default;
 	
@@ -40,5 +39,3 @@ if(class_exists($nombre_controlador)){
 }
 
 // require_once 'views/layout/footer.php';
-
-

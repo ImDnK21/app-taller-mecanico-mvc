@@ -8,7 +8,7 @@
                 </div>
             </article>
             <?php } unset($_SESSION['error_message']); unset($_SESSION['error_type']); ?>
-            <form method="POST" class="card">
+            <form action="<?= APP_URL . 'usuario/save' ?>" method="POST" class="card">
                 <div class="card-header">
                     <p class="card-header-title">
                         Registro de nuevo usuario
@@ -16,9 +16,15 @@
                 </div>
                 <div class="card-content">
                     <div class="field">
+                        <label class="label">Orden de trabajo:</label>
+                        <div class="control">
+                            <input type="text" name="idOT" class="input">
+                        </div>
+                    </div>
+                    <div class="field">
                         <label class="label">Nombre:</label>
                         <div class="control">
-                            <input type="text" name="usuario" class="input">
+                            <input type="text" name="nombre" class="input">
                         </div>
                     </div>
                     <div class="field">
