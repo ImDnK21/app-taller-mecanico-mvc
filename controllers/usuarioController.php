@@ -5,7 +5,7 @@ class usuarioController {
     
         public function index() {
             // require_once 'views/usuario/index.php';
-            echo "Controlador Usuarios, Acción index";
+            //echo "Controlador Usuarios, Acción index";
         }
 
         public function inicio() {
@@ -32,46 +32,26 @@ class usuarioController {
                     $usuario->setEmail($email);
                     $usuario->setPassword($password);
     
-                    $save = $usuario->save();
     
-                    if ($save) {
-                        die("Guardado");
+                    if ($usuario->save()) {
+                        $_SESSION['signup_message'] = 'Usuario creado correctamente';
+                        $_SESSION['signup_message_type'] = 'success';
                     } else {
-                        die("Error al guardar");
+                        $_SESSION['signup_message'] = 'Error al crear el usuario';
+                        $_SESSION['signup_message_type'] = 'danger';
                     }
                 } else {
-                    die("Error al guardar");
+                    $_SESSION['signup_message'] = 'Todos los campos son obligatorios';
+                    $_SESSION['signup_message_type'] = 'danger';
                 }
             } else {
-                die("Error al guardar");
+                $_SESSION['signup_message'] = 'Las Contraseñas no coinciden';
+                $_SESSION['signup_message_type'] = 'danger';
             }
             header("Location:" . APP_URL . 'usuario/registro');
         }
     
-    //     public function login(){
-	// 	if(isset($_POST)){
-	// 		// Identificar al usuario
-	// 		// Consulta a la base de datos
-	// 		$usuario = new Usuario();
-	// 		$usuario->setEmail($_POST['email']);
-	// 		$usuario->setPassword($_POST['password']);
-			
-	// 		$identity = $usuario->login();
-			
-	// 		if($identity && is_object($identity)){
-	// 			$_SESSION['identity'] = $identity;
-				
-	// 			if($identity->rol == 'admin'){
-	// 				$_SESSION['admin'] = true;
-	// 			}
-				
-	// 		}else{
-	// 			$_SESSION['error_login'] = 'Identificación fallida !!';
-	// 		}
-		
-	// 	}
-	// 	header("Location:".base_url);
-	// }
+   
 
     public function login() {
         if (isset($_POST) && !empty($_POST)) {

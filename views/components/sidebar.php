@@ -1,4 +1,4 @@
-<aside id="lateral">
+<!-- <aside id="lateral">
 	<div id="login" class="block_aside">
 		<?php if(!isset($_SESSION['identity'])): ?>
 			<h3>Entrar a la web</h3>
@@ -29,4 +29,4 @@
 			<?php endif; ?> 
 		</ul> 
 	</div>
-</aside>
+</aside> -->

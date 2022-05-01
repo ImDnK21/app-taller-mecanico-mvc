@@ -29,7 +29,7 @@
                     </div>
                     <div class="field">
                         <div class="control">
-                            <button class="button is-link">Iniciar sesión</button>
+                            <button type="submit" button is-link">Iniciar sesión</button>
                         </div>
                     </div>
                 </div>
