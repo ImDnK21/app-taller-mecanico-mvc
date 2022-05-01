@@ -66,11 +66,10 @@ class Usuario {
 
 	public function login(){
 		$result = false;
-		$email = $this->email;
-		$password = $this->password;
+        $email = $this->email;
+        $password = $this->password;
 		$sql = "SELECT * FROM usuario WHERE correo_electronico = '$email'";
 		$login = $this->db->query($sql);	
-		
 		if($login && $login->num_rows == 1){
 			$usuario = $login->fetch_object();
 			$verify = password_verify($password, $usuario->password);
@@ -79,7 +78,6 @@ class Usuario {
 				$result = $usuario;
 			}
 		}
-		
 		return $result;
 	}
 }
