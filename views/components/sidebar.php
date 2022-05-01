@@ -1,3 +1,27 @@
+<?php
+
+require_once 'autoload.php';
+require_once 'config/bd.php';
+require_once 'config/parameters.php';
+// require_once 'helpers/utils.php';
+// require_once 'views/layout/header.php';
+require_once 'views/components/sidebar.php';
+require_once 'views/components/header.php';
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<title>login</title>
+</head>
+<body>
+	
 <aside id="lateral">
 	<div id="login" class="block_aside">
 		<?php if(!isset($_SESSION['identity'])): ?>
@@ -14,7 +38,7 @@
 			<h3><?=$_SESSION['identity']->nombre_usuario ?> <?=$_SESSION['identity']->apellido_usuario ?></h3>
 		<?php endif; ?>
 
-		<ul>
+		 <ul>
 			<?php if(isset($_SESSION['admin'])): ?>
 				<li><a href="<?=APP_URL?>categoria/index">Gestionar categorias</a></li>
 				<li><a href="<?=APP_URL?>producto/gestion">Gestionar productos</a></li>
@@ -27,6 +51,11 @@
 			<?php else: ?> 
 				<li><a href="<?=APP_URL?>usuario/registro">Registrate aqui</a></li>
 			<?php endif; ?> 
-		</ul>
+		</ul> 
 	</div>
 </aside>
+</body>
+</html>
+
+
+
