@@ -10,7 +10,7 @@ require_once('config/parameters.php');
     <title><?php if (!empty($title)) { print($title . ' - '); } echo APP_NAME ?></title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
-    <link rel="stylesheet" href="<?= APP_URL . 'css/bulma.min.css' ?>">
+    <link rel="stylesheet" href="<?= APP_URL . 'assets/css/bulma.min.css' ?>">
     <link rel="stylesheet" href="<?= APP_URL . 'assets/css/style.css' ?>">
 </head>
 <body>
@@ -43,10 +43,10 @@ require_once('config/parameters.php');
                 <?php } else { ?>
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a href="<?= APP_URL . 'signup' ?>" class="button is-primary">
+                        <a href="<?= APP_URL . 'usuario/registro' ?>" class="button is-primary">
                             <strong>Registrarse</strong>
                         </a>
-                        <a href="<?= APP_URL . 'login' ?>" class="button is-light">
+                        <a href="<?= APP_URL . 'usuario/inicio' ?>" class="button is-light">
                             Iniciar sesión
                         </a>
                     </div>

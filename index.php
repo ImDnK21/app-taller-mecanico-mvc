@@ -4,9 +4,11 @@ require_once 'autoload.php';
 require_once 'config/bd.php';
 require_once 'config/parameters.php';
 // require_once 'helpers/utils.php';
-// require_once 'views/layout/header.php';
-require_once 'views/components/sidebar.php';
 require_once 'views/components/header.php';
+
+if (isset($_SESSION['admin'])) {
+	require_once 'views/components/sidebar.php';
+}
 
 function show_error(){
 	$error = new errorController();
@@ -39,4 +41,4 @@ if(class_exists($nombre_controlador)){
 	show_error();
 }
 
-// require_once 'views/layout/footer.php';
+require_once 'views/components/footer.php';

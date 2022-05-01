@@ -48,7 +48,6 @@
                     <div class="field">
                         <div class="control">
                             <button class="button is-link">Registrarse</button>
-                            bottom-right
                         </div>
                     </div>
                 </div>
